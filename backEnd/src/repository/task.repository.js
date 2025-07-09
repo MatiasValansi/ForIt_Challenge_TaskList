@@ -1,26 +1,27 @@
-import { JsonHandler } from "../utils/JsonManager.js"
+import { JsonHandler } from "../utils/JsonManager.js";
 
 export const TaskRepository = {
-    
-    getAll: async () => await JsonHandler.read(),
+	getAll: async () => await JsonHandler.read(),
 
-    getById: async (id) => {
-        const tasks = await JsonHandler.read()
+	getById: async (id) => {
+		const tasks = await JsonHandler.read();
 
-        if (!tasks) return null
+		if (!tasks) return null;
 
-        const taskExists = tasks.find((eachTask) => eachTask.id == id)
+		const taskExists = tasks.find((eachTask) => eachTask.id === id);
 
-        if (!taskExists) return null
-        
-        return taskExists
-    },
+		if (!taskExists) return null;
 
-    createOne: async (taskToCreate) => {
+		return taskExists;
+	},
+
+	createOne: async (taskToCreate) => {
 		const tasks = await JsonHandler.read();
 		if (!tasks) return null;
 
-		const taskExists = tasks.find((taskBook) => taskBook.id == taskToCreate.id);
+		const taskExists = tasks.find(
+			(taskBook) => taskBook.id === taskToCreate.id,
+		);
 		/*
         Valido que NO exista una tarea con el mismo ID. Si NO existe una tarea con el mismo ID, será añadido. De esta manera, vamos a evitar tener 2 tareas con el mismo ID.
         */
@@ -38,17 +39,17 @@ export const TaskRepository = {
 		return taskToCreate;
 	},
 
-    deleteById: async (id) => {
+	deleteById: async (id) => {
 		const tasks = await JsonHandler.read();
 
 		if (!tasks) return null;
 
-		const taskToDeleteExists = tasks.find((eachTask) => eachTask.id == id);
+		const taskToDeleteExists = tasks.find((eachTask) => eachTask.id === id);
 
 		if (!taskToDeleteExists) return null;
 
 		//Tendrá la colección de Libros SIN el libro eliminado.
-		const tasksToSaveAgain = tasks.filter((taskBook) => taskBook.id != id);
+		const tasksToSaveAgain = tasks.filter((taskBook) => taskBook.id !== id);
 
 		try {
 			await JsonHandler.write(tasksToSaveAgain);
@@ -59,24 +60,24 @@ export const TaskRepository = {
 		}
 	},
 
-    updateById: async (id, taskToUpdated) => {
+	updateById: async (id, taskToUpdated) => {
 		const tasks = await JsonHandler.read();
 
 		if (!tasks) return null;
 
-		const taskToUpdateExists = tasks.find((eachTask) => eachTask.id == id);
+		const taskToUpdateExists = tasks.find((eachTask) => eachTask.id === id);
 
 		if (!taskToUpdateExists) return null;
 
 		//Tendrá la colección de tareas sin la tarea a actualizar
-		const tasksToSaveAgain = tasks.filter((eachTask) => eachTask.id != id);
+		const tasksToSaveAgain = tasks.filter((eachTask) => eachTask.id !== id);
 
 		const taskUpdated = {
 			...taskToUpdateExists,
 			title: taskToUpdated.title,
 			description: taskToUpdated.description,
 			completed: taskToUpdated.completed,
-            createdAt: taskToUpdated.createdAt
+			createdAt: taskToUpdated.createdAt,
 		};
 
 		tasksToSaveAgain.push(taskUpdated);
@@ -88,5 +89,5 @@ export const TaskRepository = {
 			console.error(`No se ha podido actualizar ---> ${error.message}`);
 			return null;
 		}
-	}
-}
+	},
+};

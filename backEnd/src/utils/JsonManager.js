@@ -1,9 +1,7 @@
 import fs from "node:fs/promises";
 import { config } from "../config/config.js";
 
-
 const { DB_PATH } = config;
-
 
 export const JsonHandler = {
 	async read() {
