@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "5c09a8d5-1a04-4553-98c2-de69942ac476",
+    "title": "UPDATE 1",
+    "description": "Seguimos con la API",
+    "createdAt": "09-07-2025"
+  },
+  {
+    "id": "4acee55d-812f-405e-a465-4ef5936ddcd1",
+    "title": "Prueba 1",
+    "description": "Testeo de la API",
+    "completed": "false",
+    "createdAt": "08-07-2025"
+  }
+]
