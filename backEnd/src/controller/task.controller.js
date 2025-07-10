@@ -88,7 +88,6 @@ export const TaskController = {
 		const { task } = req.body;
 
 		try {
-			
 			const taskUpdated = await TaskService.serviceTaskUpdate(id, task);
 
 			res.status(200).json({

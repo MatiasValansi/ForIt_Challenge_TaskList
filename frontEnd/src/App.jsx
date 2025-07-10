@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { TaskForm } from './components/TaskForm.jsx'
+import { TaskList } from './components/TaskList.jsx'
 import './App.css'
 
 function App() {
@@ -8,8 +8,9 @@ function App() {
   return (
     <>
     <div className='App'>
-
-    <TaskForm></TaskForm>
+    
+    <TaskList></TaskList>
+    
     </div>
     
       
