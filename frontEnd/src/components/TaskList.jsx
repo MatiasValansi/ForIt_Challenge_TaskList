@@ -1,16 +1,20 @@
 import { useState } from "react";
-import { TaskForm } from "./TaskForm.jsx";
+import  TaskForm  from "./TaskForm.jsx";
+import { fetchTasks } from "../services/apiRouter.js";
 
 export const TaskList = () => {
 
     const [allTasks, setAllTasks] = useState([
-        {name: 'Tarea 1', completada: true},
-        {name: 'Tarea 2', completada: true}        
+                
     ])
 
-    const createNewTask = (taskName) => {
+    const createNewTask = async (taskName) => {
         //Una vez conectado con nuestra API mediante el Fetch, debo añadir la validación de que el ID no exista
-        setAllTasks([...allTasks, {name:taskName, completada:false}])
+        //setAllTasks([...allTasks, {name:taskName, completada:false}])
+        const tasks = await fetchTasks()
+        tasks.array.forEach(eachTask => {
+            setAllTasks([...allTasks, {eachTask}])
+        });
     }
 
     return (

@@ -1,26 +1,134 @@
-import { useState } from "react"
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const TaskForm = ({createNewTask}) => {
+const TaskForm = () => {
+  const { id } = useParams(); 
+  const navigate = useNavigate();
 
-    const [ newTaskName, setNewTaskName ] = useState()
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    completed: false,
+    createdAt: new Date().toLocaleDateString('es-AR') 
+  });
 
-    const handleSubmit = (task) => {
-    task.preventDefault() //Para que no se recargue la página
-    alert(`Se añadió la tarea: ${newTaskName} con exito`)
-    //localStorage.setItem("tasks", newTaskName)
-    
-    createNewTask(newTaskName)
-    setNewTaskName('')
-  }
+  useEffect(() => {
+    if (id) {
+      fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            const task = data.payload.taskFoundById;
+            setFormData({
+              title: task.title,
+              description: task.description,
+              completed: task.completed,
+              createdAt: task.createdAt
+            });
+          } else {
+            alert("Error al obtener la tarea");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Error de conexión al cargar la tarea");
+        });
+    }
+  }, [id]);
 
-    return (
-        <form onSubmit={handleSubmit}>
-      <div>
-        <input type="text" placeholder='Ingresá una nueva tarea' onChange={(taskText) => setNewTaskName(taskText.target.value)}/>
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+
+    if (!formData.title.trim() || !formData.description.trim()) {
+      alert("Completa los campos obligatorios");
+      return;
+    }
+
+    const method = id ? 'PUT' : 'POST';
+    const url = id
+      ? `${import.meta.env.VITE_API_URL}/tasks/${id}`
+      : `${import.meta.env.VITE_API_URL}/tasks`;
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ task: formData })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(id ? "Tarea actualizada " : "Tarea creada ");
+        navigate('/');
+      } else {
+        alert(data.mensaje || "Error en la operación");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión con el servidor");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>{id ? "Editar tarea" : "Nueva tarea"}</h2>
       
-        <button>Guardar Tarea</button>
+      <div>
+        <input
+          type="text"
+          name="title"
+          placeholder="Título"
+          value={formData.title}
+          onChange={handleChange}
+        />
+      </div>
 
-      </div>      
+      <div>
+        <textarea
+          name="description"
+          placeholder="Descripción"
+          value={formData.description}
+          onChange={handleChange}
+        ></textarea>
+      </div>
+
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            name="completed"
+            checked={formData.completed}
+            onChange={handleChange}
+          />
+          Completada
+        </label>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          name="createdAt"
+          placeholder="Fecha de creación"
+          value={formData.createdAt}
+          onChange={handleChange}
+        />
+      </div>
+
+      <button type="submit">
+        {id ? "Actualizar tarea" : "Guardar tarea"}
+      </button>
     </form>
-    )
-}
+  );
+};
+
+export default TaskForm; 
+
