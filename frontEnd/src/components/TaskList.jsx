@@ -1,45 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import  TaskForm  from "./TaskForm.jsx";
 import { fetchTasks } from "../services/apiRouter.js";
 
 export const TaskList = () => {
+  const [allTasks, setAllTasks] = useState([]);
 
-    const [allTasks, setAllTasks] = useState([
-                
-    ])
-
-    const createNewTask = async (taskName) => {
-        //Una vez conectado con nuestra API mediante el Fetch, debo añadir la validación de que el ID no exista
-        //setAllTasks([...allTasks, {name:taskName, completada:false}])
-        const tasks = await fetchTasks()
-        tasks.array.forEach(eachTask => {
-            setAllTasks([...allTasks, {eachTask}])
-        });
+  const loadTasks = async () => {
+    try {
+      const res = await fetchTasks();
+      if (res.ok && res.payload) {
+        setAllTasks(res.payload); 
+      } else {
+        alert("No se pudieron obtener las tareas.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión con la API");
     }
+  };
 
-    return (
-        <div>
-            <TaskForm createNewTask={createNewTask}/>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tareas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        allTasks.map(eachTask => (
-                            <tr key={eachTask.name}>
-                                {/* Una vez conectada con la API, el key deberá ser el ID de Task */}
-                                <td>
-                                    {eachTask.name}
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </div>
-    )
+  // Carga inicial de tareas
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
-}
+  return (
+    <div>
+      <TaskForm/>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Completada</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+            {allTasks.map((task) => (
+            <tr key={task.id}>
+              <td>{task.title}</td>
+              <td>{task.completed ? "✅" : "❌"}</td>
+              <td>{task.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
