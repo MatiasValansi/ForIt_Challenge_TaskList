@@ -1,5 +1,6 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 const TaskForm = () => {
   const { id } = useParams(); 
@@ -46,6 +47,8 @@ const TaskForm = () => {
 
   const handleSubmit = async (e) => {
 
+    e.preventDefault()
+
     if (!formData.title.trim() || !formData.description.trim()) {
       alert("Completa los campos obligatorios");
       return;
@@ -65,11 +68,10 @@ const TaskForm = () => {
 
       const data = await res.json();
 
-      console.log(res.ok); // SOLUCIONAR ESTO
-      
-      if (res) {
+                  
+      if (res.ok) {
         alert(id ? "Tarea actualizada " : "Tarea creada ");
-        navigate('/');
+        navigate('/tasks');//Resolver porque no me redirige
       } else {
         alert(data.mensaje || "Error en la operación");
       }
@@ -77,7 +79,8 @@ const TaskForm = () => {
     } catch (err) {
       console.error(err);
       alert("Error de conexión con el servidor");
-    }
+    } 
+
   };
 
   return (
@@ -125,6 +128,9 @@ const TaskForm = () => {
         />
       </div>
 
+      <button >
+        <Link to={`/tasks`}> Volver al Menu</Link>
+      </button>
       <button type="submit">
         {id ? "Actualizar tarea" : "Guardar tarea"}
       </button>
