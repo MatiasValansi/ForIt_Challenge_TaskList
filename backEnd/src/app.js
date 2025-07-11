@@ -12,6 +12,10 @@ app.use(express.json());
 
 app.use("/api", taskRouter);
 
+app.get("/", (req, res) => {
+  res.redirect("/api/tasks");
+});
+
 app.listen(config.PORT, () => {
 	const message = `Server is running ==> http://${config.HOST}:${config.PORT} 🟢⭐`;
 	console.log(message);

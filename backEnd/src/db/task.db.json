@@ -1,11 +1,5 @@
 [
   {
-    "id": "5c09a8d5-1a04-4553-98c2-de69942ac476",
-    "title": "UPDATE 1",
-    "description": "Seguimos con la API",
-    "createdAt": "09-07-2025"
-  },
-  {
     "id": "4acee55d-812f-405e-a465-4ef5936ddcd1",
     "title": "Prueba 1",
     "description": "Testeo de la API",
@@ -32,5 +26,40 @@
     "description": "Realizo una prueba mas",
     "completed": true,
     "createdAt": "10/7/2025"
+  },
+  {
+    "id": "02d1cbca-12e0-4cbe-8b54-3dcc6d3db538",
+    "title": "Confirmado, funciona res.ok",
+    "description": "GO GO GO",
+    "completed": true,
+    "createdAt": "11/7/2025"
+  },
+  {
+    "id": "5c09a8d5-1a04-4553-98c2-de69942ac476",
+    "title": "UPDATE 1",
+    "description": "Seguimos con la API",
+    "createdAt": "09-07-2025",
+    "completed": true
+  },
+  {
+    "id": "7427e79d-ea60-49b3-aa1e-2ed0890097fc",
+    "title": "Probando",
+    "description": "1234\nfunciona",
+    "completed": true,
+    "createdAt": "11/7/2025"
+  },
+  {
+    "id": "27312a5f-cc79-41e9-a560-14221a06a5f0",
+    "title": "Funciona Res.ok",
+    "description": "A ver",
+    "completed": false,
+    "createdAt": "11/7/2025"
+  },
+  {
+    "id": "f2b0e11a-6641-4ac9-9dca-2921d33a48b7",
+    "title": "Resolver res.ok",
+    "description": "Para ver porque no funciona",
+    "completed": false,
+    "createdAt": "11/7/2025"
   }
 ]

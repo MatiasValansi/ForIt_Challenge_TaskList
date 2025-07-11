@@ -1,5 +1,22 @@
 # ForIt_Challenge_TaskList
 
+## ⚙️ Instrucciones para ejecutar el proyecto localmente
+
+> Requiere tener instalado Node.js
+
+Ejecutar backEnd:
+ cd backEnd
+ npm install --> Para instalar dependencias
+ npm run app --> Ejecutar la API del BackEnd
+
+Ejecutar FrontEnd:
+ cd backEnd
+ npm install --> Para instalar depedenciar
+ npm run app --> Ejecutar el FrontEnd
+
+
+EXTRA:
+
 Aclaración:
 Realizo la persistencia en un archivo .json como bonus en vez de en un array temporal.
 
