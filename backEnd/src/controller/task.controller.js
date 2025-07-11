@@ -24,7 +24,12 @@ export const TaskController = {
 		const { id } = req.params;
 		const taskFoundById = await TaskService.serviceTaskValidation(id);
 
-		if (!taskFoundById) {
+		console.log(taskFoundById);
+		console.log(1234);
+		
+		
+
+		if (taskFoundById===null) {
 			res.status(404).json({
 				payload: null,
 				message: `No se encontró la tarea con ID: ${id}`,
@@ -32,6 +37,7 @@ export const TaskController = {
 			});
 			return null;
 		}
+		console.log(taskFoundById);
 
 		res.status(200).json({
 			message: "Success 🟢",
@@ -61,28 +67,6 @@ export const TaskController = {
 		}
 	},
 
-	taskDeleteOne: async (req, res) => {
-		const { id } = req.params;
-
-		try {
-			const taskDeleted = await TaskService.serviceTaskDelete(id);
-			res.status(200).json({
-				message: `Success 🟢 ==> La tarea ${taskDeleted.title} fue eliminada con exito 🗑️`,
-				payload: { taskDeleted },
-				ok: true,
-			});
-			return;
-		} catch (e) {
-			res.status(404).json({
-				error: e.message,
-				mensaje:
-					"Uups! Algo salió mal ... 🔴 ==> No se pudo eliminar la tarea ❌",
-				ok: false,
-			});
-			return;
-		}
-	},
-
 	taskUpdateOne: async (req, res) => {
 		const { id } = req.params;
 		const { task } = req.body;
@@ -106,4 +90,27 @@ export const TaskController = {
 			return;
 		}
 	},
+	
+	taskDeleteOne: async (req, res) => {
+		const { id } = req.params;
+
+		try {
+			const taskDeleted = await TaskService.serviceTaskDelete(id);
+			res.status(200).json({
+				message: `Success 🟢 ==> La tarea ${taskDeleted.title} fue eliminada con exito 🗑️`,
+				payload: { taskDeleted },
+				ok: true,
+			});
+			return;
+		} catch (e) {
+			res.status(404).json({
+				error: e.message,
+				mensaje:
+					"Uups! Algo salió mal ... 🔴 ==> No se pudo eliminar la tarea ❌",
+				ok: false,
+			});
+			return;
+		}
+	}
+	
 };

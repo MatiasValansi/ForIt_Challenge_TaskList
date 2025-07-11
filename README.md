@@ -7,7 +7,7 @@
 Ejecutar backEnd:
  cd backEnd
  npm install --> Para instalar dependencias
- npm run app --> Ejecutar la API del BackEnd
+ npm run app --> Ejecutar la API del BackEnd. Se redirige a la ruta api/tasks para mostrar las tareas que existen.
 
 Ejecutar FrontEnd:
  cd backEnd
@@ -18,7 +18,7 @@ Ejecutar FrontEnd:
 EXTRA:
 
 Aclaración:
-Realizo la persistencia en un archivo .json como bonus en vez de en un array temporal.
+Realizo la persistencia en un archivo .json como bonus en vez de en un array temporal. La ventaja por la cual decidí implementar el .JSON como extra es que al ejecutar la API, podré ver su contenido gracias al .JSON.
 
 🛠 Herramientas usadas:
 - ESLint (configuración recomendada, como indica el enunciado)

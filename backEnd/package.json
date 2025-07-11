@@ -24,14 +24,16 @@
   },
   "contributors": [],
   "scripts": {
-    "app": "node --watch ./src/app.js",
+    "app": "node --env-file=./.env --watch ./src/app.js",
     "lint": "npx @biomejs/biome check --write ./src"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.5",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "postgres": "^3.4.7"
   }
 }

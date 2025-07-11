@@ -1,9 +1,9 @@
 import { Task } from "../model/task.js";
-import { TaskRepository } from "../repository/task.repository.js";
+import { TaskSupabaseRepository } from "../repository/task.supabase.repository.js";
 
 export const TaskService = {
 	serviceAllTasks: async () => {
-		const tasks = await TaskRepository.getAll();
+		const tasks = await TaskSupabaseRepository.getAll() 
 
 		if (!tasks) return null;
 
@@ -11,7 +11,8 @@ export const TaskService = {
 	},
 
 	serviceTaskValidation: async (id) => {
-		const idTask = await TaskRepository.getById(id);
+		const idTask = await TaskSupabaseRepository.getById(id)
+		
 		if (!idTask) return null;
 
 		return idTask;
@@ -19,36 +20,36 @@ export const TaskService = {
 
 	serviceTaskCreation: async (taskToCreate) => {
 		const dataTask = {
-			...taskToCreate,
-			id: crypto.randomUUID().toString(),
+			...taskToCreate
 		};
 
 		const modelTask = new Task(
-			dataTask.id,
+			
 			dataTask.title,
 			dataTask.description,
 			dataTask.completed,
 			dataTask.createdAt,
 		);
 
-		const taskCreated = TaskRepository.createOne(modelTask);
+		const taskCreated = await TaskSupabaseRepository.createOne(modelTask)
 
 		return taskCreated;
 	},
 
-	serviceTaskDelete: (id) => {
-		const taskDeleted = TaskRepository.deleteById(id);
+	serviceTaskUpdate: async (id, taskToUpdated) => {
+			const taskUpdated = await TaskSupabaseRepository.updateOneById(id, taskToUpdated) 
+
+			if (!taskUpdated) return null;
+
+			return taskUpdated;
+	},
+
+	serviceTaskDelete: async (id) => {
+		const taskDeleted = await TaskSupabaseRepository.deleteOneById(id) 
 
 		if (!taskDeleted) return null;
 
 		return taskDeleted;
 	},
-
-	serviceTaskUpdate: async (id, taskToUpdated) => {
-		const taskUpdated = await TaskRepository.updateById(id, taskToUpdated);
-
-		if (!taskUpdated) return null;
-
-		return taskUpdated;
-	},
+	
 };

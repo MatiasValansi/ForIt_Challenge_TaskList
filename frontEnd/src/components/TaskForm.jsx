@@ -17,9 +17,9 @@ const TaskForm = () => {
     if (id) {
       fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`)
         .then(res => res.json())
-        .then(data => {
+        .then(data => {        
           if (data.ok) {
-            const task = data.payload.taskFoundById;
+            const task = data.payload.taskFoundById;           
             setFormData({
               title: task.title,
               description: task.description,
@@ -71,7 +71,7 @@ const TaskForm = () => {
                   
       if (res.ok) {
         alert(id ? "Tarea actualizada " : "Tarea creada ");
-        navigate('/tasks');//Resolver porque no me redirige
+        navigate('/tasks');
       } else {
         alert(data.mensaje || "Error en la operación");
       }
