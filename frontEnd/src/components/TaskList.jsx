@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import  TaskForm  from "./TaskForm.jsx";
-import { fetchTasks, updateTask } from "../services/apiRouter.js";
+import { fetchTasks, updateTask, deleteTask } from "../services/apiRouter.js";
 import { Link } from "react-router-dom";
 
 
@@ -60,7 +59,6 @@ export const TaskList = () => {
             return filtered.map((task) => (
               <tr key={task.id}>
                 <td>{task.title}</td>
-                <td>{task.completed ? "✅" : "❌"}</td>
                 <td>{task.description}</td>
                 <td>
                   <input
@@ -70,11 +68,38 @@ export const TaskList = () => {
                   />
                 </td>
                 <td>
-                  <Link to={`/tarea/${task.id}`}>🔍 Ver</Link>
+                  <button>
+                  <Link to={`/editTask/${task.id}`}>Editar ✍🏻</Link>
+                  </button>                  
                 </td>
+                <td><button onClick={() => deleteATask(task)}>Eliminar 🗑️</button></td>
               </tr>
             ));
           };
+
+          const deleteATask = async (taskToDelete) => {
+            
+            const isConfirmed = window.confirm(
+              `¿Estás seguro de que quieres eliminar la tarea "${taskToDelete.title}"?`
+            );
+
+            if (isConfirmed) {
+              try {
+                const res = await deleteTask(taskToDelete.id)
+
+                if (res && !res.error) {
+                  alert("Tarea eliminada exitosamente.");
+                  await loadTasks(); // <--- Volver a cargar todas las tareas
+                  } else {
+                    alert(res.message || "Error al eliminar la tarea.");
+                    throw new Error(res.mensaje || "Error en la API");            
+                }
+                } catch (err) {
+                  console.error("Error al elimiar tarea:", err);
+                  alert("Error al guardar el cambio. Se revirtió el estado.");
+                }
+              }                
+          }
 
     // Carga inicial de tareas
     useEffect(() => {
@@ -84,22 +109,23 @@ export const TaskList = () => {
 
   return (
     <div>
-      <TaskForm/>
-      
-      <table>
-        <div style={{ marginBottom: '1rem' }}>
+     
+      <div style={{ marginBottom: '1rem' }}>
           <button onClick={() => setFilterStatus("all")}>📋 Todas</button>
           <button onClick={() => setFilterStatus("completed")}>✅ Completadas</button>
           <button onClick={() => setFilterStatus("pending")}>⏳ Pendientes</button>
-        </div>
+          <button>
+            <Link to={`/newTask`}>🟢Añadir Tarea</Link>
+          </button>
+      </div>
 
+      <table>
         <thead>
           <tr>
             <th>Título</th>
+            <th>Descripición</th>
             <th>Completada</th>
-            <th>Descripción</th>
-            <th>Toggle</th>
-            <th>Detalle</th>
+            
           </tr>
         </thead>
         <tbody>

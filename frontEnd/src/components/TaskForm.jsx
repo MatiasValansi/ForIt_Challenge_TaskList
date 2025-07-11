@@ -65,7 +65,9 @@ const TaskForm = () => {
 
       const data = await res.json();
 
-      if (res.ok) {
+      console.log(res.ok); // SOLUCIONAR ESTO
+      
+      if (res) {
         alert(id ? "Tarea actualizada " : "Tarea creada ");
         navigate('/');
       } else {
