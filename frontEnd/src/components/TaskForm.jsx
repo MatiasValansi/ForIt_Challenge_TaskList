@@ -84,57 +84,78 @@ const TaskForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{id ? "Editar tarea" : "Nueva tarea"}</h2>
+    
+    <div className="min-vh-100 bg-black text-light py-4 px-3">
+    <div className="container bg-dark p-4 rounded shadow">
+      <h2 className="mb-4">{id ? "✍🏻 Editar tarea" : "📝 Nueva tarea"}</h2>
       
-      <div>
-        <input
-          type="text"
-          name="title"
-          placeholder="Título"
-          value={formData.title}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <textarea
-          name="description"
-          placeholder="Descripción"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
-      </div>
-
-      <div>
-        <label>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Título *</label>
           <input
+            type="text"
+            name="title"
+            placeholder="Ingrese el título"
+            value={formData.title}
+            onChange={handleChange}
+            className="form-control bg-dark text-light border-secondary"
+            required
+          />
+        </div>
+
+        {/* Descripción */}
+        <div className="mb-3">
+          <label className="form-label">Descripción *</label>
+          <textarea
+            name="description"
+            placeholder="Ingrese la descripción"
+            value={formData.description}
+            onChange={handleChange}
+            className="form-control bg-dark text-light border-secondary"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+
+        {/* Checkbox completada */}
+        <div className="form-check form-switch mb-3">
+          <input
+            className="form-check-input"
             type="checkbox"
             name="completed"
             checked={formData.completed}
             onChange={handleChange}
+            id="completedCheck"
           />
-          Completada
-        </label>
-      </div>
+          <label className="form-check-label" htmlFor="completedCheck">
+            ¿Está completada?
+          </label>
+        </div>
 
-      <div>
-        <input
-          type="text"
-          name="createdAt"
-          placeholder="Fecha de creación"
-          value={formData.createdAt}
-          onChange={handleChange}
-        />
-      </div>
+        {/* Fecha de creación */}
+        <div className="mb-3">
+          <label className="form-label">Fecha de creación</label>
+          <input
+            type="text"
+            name="createdAt"
+            value={formData.createdAt}
+            onChange={handleChange}
+            className="form-control bg-dark text-light border-secondary"
+          />
+        </div>
 
-      <button >
-        <Link to={`/tasks`}> Volver al Menu</Link>
-      </button>
-      <button type="submit">
-        {id ? "Actualizar tarea" : "Guardar tarea"}
-      </button>
-    </form>
+        {/* Botones */}
+        <div className="d-flex justify-content-between mt-4">
+          <Link to="/tasks" className="btn btn-outline-light">
+            ← Volver al menú
+          </Link>
+          <button type="submit" className="btn btn-primary fw-bold">
+            {id ? "💾 Actualizar tarea" : "🟢 Guardar tarea"}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
   );
 };
 

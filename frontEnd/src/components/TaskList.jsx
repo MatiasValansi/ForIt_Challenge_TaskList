@@ -58,24 +58,41 @@ export const TaskList = () => {
             }
 
             return filtered.map((task) => (
-              <tr key={task.id}>
-                <td>{task.title}</td>
-                <td>{task.description}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleTask(task)}
-                  />
+            <tr key={task.id}>
+              <td>{task.title}</td>
+              <td>{task.description}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleTask(task)}
+                />
+              </td>
+              <td> 
+                                                  
+                  <Link
+                    to={`/editTask/${task.id}`}
+                    className="btn btn-sm btn-outline-light me-2"
+                  >
+                    ✍🏻 Editar
+                  </Link>
+                  
+                  <Link
+                    to={`/tasks/${task.id}`}
+                    className="btn btn-sm btn-outline-info me-2"
+                  >
+                    🔍 Ver
+                  </Link>
+
+                  <button
+                    onClick={() => deleteATask(task)}
+                    className="btn btn-sm btn-outline-danger"
+                  >
+                    🗑️ Eliminar
+                  </button>
                 </td>
-                <td>
-                  <button>
-                  <Link to={`/editTask/${task.id}`}>Editar ✍🏻</Link>
-                  </button>                  
-                </td>
-                <td><button onClick={() => deleteATask(task)}>Eliminar 🗑️</button></td>
-              </tr>
-            ));
+            </tr>
+          ));
           };
 
           const deleteATask = async (taskToDelete) => {
@@ -109,30 +126,50 @@ export const TaskList = () => {
   
 
   return (
-    <div>
-     
-      <div style={{ marginBottom: '1rem' }}>
-          <button onClick={() => setFilterStatus("all")}>📋 Todas</button>
-          <button onClick={() => setFilterStatus("completed")}>✅ Completadas</button>
-          <button onClick={() => setFilterStatus("pending")}>⏳ Pendientes</button>
-          <button>
-            <Link to={`/newTask`}>🟢Añadir Tarea</Link>
+    <div className="min-vh-100 bg-black text-light py-4 px-3">
+      <div className="container bg-dark p-4 rounded">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+      
+        <div className="btn-group" role="group">
+          <button
+            className="btn btn-outline-light"
+            onClick={() => setFilterStatus("all")}
+          >
+            📋 Todas
           </button>
+          <button
+            className="btn btn-outline-success"
+            onClick={() => setFilterStatus("completed")}
+          >
+            ✅ Completadas
+          </button>
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => setFilterStatus("pending")}
+          >
+            ⏳ Pendientes
+          </button>
+        </div>
+
+        <Link to="/newTask" className="btn btn-primary fw-bold">
+          ➕ Añadir Tarea
+        </Link>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Descripición</th>
-            <th>Completada</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          {taskTable()}
-        </tbody>
-      </table>
+      <div className="table-responsive">
+        <table className="table table-dark table-hover table-bordered">
+          <thead className="bg-dark text-light">
+            <tr>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Completada</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>{taskTable()}</tbody>
+        </table>
+      </div>
+    </div>
     </div>
   );
 };
