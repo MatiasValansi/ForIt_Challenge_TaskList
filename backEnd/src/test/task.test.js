@@ -13,7 +13,7 @@ describe("Pruebas Unitarias en mi API de Tareas", () => {
         title: "TEST - Prueba Unitaria",
         description: "Intentando hacer un POST con Jest",
         completed: false,
-        createdAt: "2025-07-11T00:00:00Z"
+        createdAt: "11/07/25025"
       }
     };
 
@@ -34,7 +34,7 @@ describe("Pruebas Unitarias en mi API de Tareas", () => {
   });
 
   let taskId;
-  
+
   beforeAll(async () => {
     // Creo una tarea temporal que luego se eliminara en caso de que se concrete la prueba unitaria
     const newTask = {

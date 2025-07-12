@@ -8,11 +8,14 @@ Ejecutar backEnd:
  cd backEnd
  npm install --> Para instalar dependencias
  npm run app --> Ejecutar la API del BackEnd. Se redirige a la ruta api/tasks para mostrar las tareas que existen.
+ cp backEnd/.env.example backEnd/.env --> Renombra el .env.example en .env para poder correr el proyecto
 
 Ejecutar FrontEnd:
  cd backEnd
  npm install --> Para instalar depedenciar
  npm run app --> Ejecutar el FrontEnd
+ cp frontEnd/.env.example frontEnd/.env --> Renombra el .env.example en .env para poder correr el proyecto
+
 
 
 EXTRA:
@@ -23,6 +26,7 @@ Realizo la persistencia en un archivo .json como bonus en vez de en un array tem
 🛠 Herramientas usadas:
 - ESLint (configuración recomendada, como indica el enunciado)
 - Biome (formateador moderno, agregado como complemento para mejorar estilo)
+- Jest para pruebas unitarias + Babel + dotenv
 
 Linting & Formato
 Este proyecto utiliza:
