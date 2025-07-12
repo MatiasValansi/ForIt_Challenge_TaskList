@@ -15,14 +15,7 @@ app.use("/api", taskRouter);
 
 app.get("/", async (req, res) => {
   res.redirect("/api/tasks");
-
-//   const data = await TaskSupabaseRepository.getAll()
-//   res.json(
-// 		{data}
-// 	)
 });
 
-app.listen(config.PORT, () => {
-	const message = `Server is running ==> http://${config.HOST}:${config.PORT} 🟢⭐`;
-	console.log(message);
-});
+
+export default app

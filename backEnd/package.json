@@ -24,11 +24,18 @@
   },
   "contributors": [],
   "scripts": {
-    "app": "node --env-file=./.env --watch ./src/app.js",
-    "lint": "npx @biomejs/biome check --write ./src"
+    "app": "node --env-file=./.env --watch ./src/server.js",
+    "start": "node --env-file=./.env --watch ./src/app.js",
+    "lint": "npx @biomejs/biome check --write ./src",
+    "test": "jest"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.6"
+    "@babel/preset-env": "^7.28.0",
+    "@biomejs/biome": "2.0.6",
+    "babel-jest": "^30.0.4",
+    "dotenv": "^17.2.0",
+    "jest": "^30.0.4",
+    "supertest": "^7.1.3"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.5",
