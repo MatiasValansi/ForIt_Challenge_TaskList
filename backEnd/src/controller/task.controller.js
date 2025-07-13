@@ -65,9 +65,8 @@ export const TaskController = {
 
 		try {
 			const taskResponse = await TaskService.serviceTaskCreation(task);
-			
+
 			console.log(taskResponse);
-			
 
 			res.status(200).json({
 				message: "Success 🟢 ==> Tarea creada con exito",

@@ -1,47 +1,126 @@
-# ForIt_Challenge_TaskList
 
-## ⚙️ Instrucciones para ejecutar el proyecto localmente
-
-> Requiere tener instalado Node.js
-
-Ejecutar backEnd:
- cd backEnd
- npm install --> Para instalar dependencias
- cp .env.example .env --> Renombra el .env.example en .env para poder correr el proyecto
- npm run app --> Ejecutar la API del BackEnd. Se redirige a la ruta api/tasks para mostrar las tareas que existen.
+# 📝 TaskList - Proyecto para ForIT
 
 
-Ejecutar FrontEnd:
- cd frontEnd
- npm install --> Para instalar depedenciar
- cp .env.example .env --> Renombra el .env.example en .env para poder correr el proyecto
- npm run dev --> Ejecutar el FrontEnd
- 
+Es una aplicación fullstack para gestionar tareas. Podés crear, ver, editar y eliminar tareas usando una API en Express conectada a Supabase, y un frontend moderno hecho en React con diseño oscuro y Bootstrap.
+
+---
+## 🚀 Ejecutar el proyecto
+
+### 1° ejecutar BackEnd
+
+```bash
+cd backEnd
+npm install
+cp .env.example .env
+npm run app
+```
+
+La API correrá en: `http://localhost:3004/api/tasks`
+
+### 2° ejecutar FrontEnd
+
+```bash
+cd frontEnd
+npm install
+cp .env.example .env
+npm run dev
+```
+
+La app React se abrirá automáticamente en tu navegador en `http://localhost:5173`.
+
+---
+
+---
+# Información acerca del Proyecto y las herramientas utilizadas
+
+## ⚙️ Herramientas utilizadas
+
+### 🔙 BackEnd
+- **Node.js** + **Express**
+- **Supabase** como base de datos
+- **ESLint** (configuración recomendada)
+- **Jest** + **Supertest** para pruebas unitarias
+- **Biome** como formateador de código
+- **Dotenv** para variables de entorno
+- **CORS**
+
+### 🔜 FrontEnd
+- **React 19**
+- **React Router DOM 7**
+- **Bootstrap 5** para el diseño
+- **ESLint**
+- **Biome**
+- **Vite** para el entorno de desarrollo
+
+---
+
+## 🧪 Instrucciones para ejecutar localmente
+
+### ✅ Requisitos previos
+- Tener instalado **Node.js** y **npm**
+
+---
+
+## 🔧 En caso de no correr en la la maquina virtual de GitHub, Clonar el proyecto
+
+```bash
+git clone https://github.com/tuusuario/ForIT-TaskList.git
+cd ForIT-TaskList
+```
+
+---
+
+## 📁 Variables de entorno
+
+### 📦 BackEnd
+
+Renombrá el .env.example en .env para poder correr el proyecto npm run app:
+
+`env.example .env` 
 
 
+### 🌐 FrontEnd
 
-EXTRA:
+Renombrá el .env.example en .env para poder correr el proyecto npm run dev:
 
-
-🛠 Herramientas usadas:
-- ESLint (configuración recomendada, como indica el enunciado)
-- Biome (formateador moderno, agregado como complemento para mejorar estilo)
-- Jest para pruebas unitarias + Babel + dotenv
-
-Linting & Formato
-Este proyecto utiliza:
-
-* ESLint, con configuración recomendada para React (.eslintrc.json)
-
-* Biome, como formateador automático
+`env.example .env` 
 
 
-🧪 Ejecutar linter:
+---
 
+## 🧪 Pruebas unitarias
+
+En el backend podés correr pruebas unitarias con:
+
+```bash
+npm run test
+```
+
+Se utilizan Jest y Supertest para testear la API.
+
+---
+
+## 🧹 Linting y formato
+
+### BackEnd
+
+```bash
 npm run lint
+npm run biome
+```
 
-🧼 Aplicar formato automático:
+### FrontEnd
 
+```bash
+npm run lint
 npm run format
+```
 
-ESLint se usa como base para cumplir con el enunciado del challenge. Biome se agregó como herramienta opcional para mejorar el estilo de código.
+---
+
+## 👨‍💻 Comentarios finales
+
+- Se respetaron todos los requisitos obligatorios del PDF.
+- Se agregaron funcionalidades extra como diseño con Bootstrap, pruebas unitarias y conexión a Supabase.
+- El proyecto es fácilmente extensible y está organizado en capas (`controller`, `service`, `repository`, etc.).
