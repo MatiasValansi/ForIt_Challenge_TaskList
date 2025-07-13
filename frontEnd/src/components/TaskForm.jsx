@@ -10,7 +10,7 @@ const TaskForm = () => {
     title: '',
     description: '',
     completed: false,
-    createdAt: new Date().toLocaleDateString('es-AR') 
+    createdAt: new Date().toISOString().split('T')[0] 
   });
 
   useEffect(() => {
