@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {TaskList} from './components/TaskList.jsx';
 import TaskForm from './components/TaskForm.jsx';
 import TaskItem from './components/TaskItem.jsx';
+import Footer from './components/Footer.jsx';
 import './App.css'
 
 function App() {
@@ -18,7 +19,10 @@ function App() {
         <Route path="/editTask/:id" element={<TaskForm />} />
         <Route path="/tasks/:id" element={<TaskItem />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>  
+
+    
     </>
   )
 }

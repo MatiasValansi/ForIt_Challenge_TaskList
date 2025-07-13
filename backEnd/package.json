@@ -26,14 +26,20 @@
   "scripts": {
     "app": "node --env-file=./.env --watch ./src/server.js",
     "start": "node --env-file=./.env --watch ./src/app.js",
-    "lint": "npx @biomejs/biome check --write ./src",
+    "lint": "eslint ./src/test --fix",
+    "biome": "npx @biomejs/biome check --write ./src",
     "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",
     "@biomejs/biome": "2.0.6",
+    "@eslint/js": "^9.31.0",
     "babel-jest": "^30.0.4",
     "dotenv": "^17.2.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0",
     "jest": "^30.0.4",
     "supertest": "^7.1.3"
   },

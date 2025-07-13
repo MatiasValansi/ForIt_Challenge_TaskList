@@ -1,9 +1,6 @@
+import cors from "cors";
 import express from "express";
-import { config } from "./config/config.js";
 import { taskRouter } from "./routes/taskRouter.js";
-import cors from 'cors';
-import { TaskSupabaseRepository } from "./repository/task.supabase.repository.js";
-
 
 const app = express();
 
@@ -13,9 +10,8 @@ app.use(express.json());
 
 app.use("/api", taskRouter);
 
-app.get("/", async (req, res) => {
-  res.redirect("/api/tasks");
+app.get("/", async (_req, res) => {
+	res.redirect("/api/tasks");
 });
 
-
-export default app
+export default app;

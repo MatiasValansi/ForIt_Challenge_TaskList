@@ -2,48 +2,62 @@ import { TaskService } from "../services/task.service.js";
 
 export const TaskController = {
 	taskAll: async (_req, res) => {
-		const allTasks = await TaskService.serviceAllTasks();
+		try {
+			const allTasks = await TaskService.serviceAllTasks();
 
-		if (allTasks.length === 0) {
-			res.status(404).json({
+			if (allTasks.length === 0) {
+				return res.status(404).json({
+					payload: null,
+					message: `Warning ⚠️ - No se encontraron tareas`,
+					ok: false,
+				});
+			}
+
+			res.status(200).json({
+				message: "Success 🟢 - Tareas halladas correctamente",
+				payload: allTasks,
+				ok: true,
+			});
+		} catch (error) {
+			console.error("Error al obtener las tareas:", error);
+			res.status(500).json({
+				message:
+					"Uups! Algo salió mal ... 🔴 ==> No se pudo hallar las táreas ❌",
 				payload: null,
-				message: `Warning ⚠️ - No se encontraron tareas`,
 				ok: false,
 			});
-			return null;
 		}
-
-		res.status(200).json({
-			message: "Success 🟢 - Tareas halladas correctamente",
-			payload: allTasks,
-			ok: true,
-		});
 	},
 
 	taskValidation: async (req, res) => {
-		const { id } = req.params;
-		const taskFoundById = await TaskService.serviceTaskValidation(id);
+		try {
+			const { id } = req.params;
+			const taskFoundById = await TaskService.serviceTaskValidation(id);
 
-		console.log(taskFoundById);
-		console.log(1234);
-		
-		
+			if (taskFoundById.length === 0) {
+				return res.status(404).json({
+					payload: null,
+					message: `No se encontró la tarea con ID: ${id}`,
+					ok: false,
+				});
+			}
 
-		if (taskFoundById===null) {
-			res.status(404).json({
+			res.status(200).json({
+				message: "Success 🟢 - La tarea fue hallada correctamente",
+				payload: { taskFoundById },
+				ok: true,
+			});
+		} catch (error) {
+			console.error(
+				`Error al validar la tarea con ID: ${req.params.id}`,
+				error,
+			);
+			res.status(500).json({
+				message: `Uups! Algo salió mal ... 🔴 ==> No se pudo halar la tarea ❌`,
 				payload: null,
-				message: `No se encontró la tarea con ID: ${id}`,
 				ok: false,
 			});
-			return null;
 		}
-		console.log(taskFoundById);
-
-		res.status(200).json({
-			message: "Success 🟢",
-			payload: { taskFoundById },
-			ok: true,
-		});
 	},
 
 	taskCreateOne: async (req, res) => {
@@ -60,7 +74,7 @@ export const TaskController = {
 		} catch (e) {
 			res.status(404).json({
 				error: e.message,
-				mensaje: "Uups! Algo salió mal ... 🔴 ==> No se pudo crear la tarea ❌",
+				message: "Uups! Algo salió mal ... 🔴 ==> No se pudo crear la tarea ❌",
 				ok: false,
 			});
 			return;
@@ -83,14 +97,14 @@ export const TaskController = {
 		} catch (e) {
 			res.status(404).json({
 				error: e.message,
-				mensaje:
+				message:
 					"Uups! Algo salió mal ... 🔴 ==> No se pudo actualizar la tarea ❌",
 				ok: false,
 			});
 			return;
 		}
 	},
-	
+
 	taskDeleteOne: async (req, res) => {
 		const { id } = req.params;
 
@@ -105,12 +119,11 @@ export const TaskController = {
 		} catch (e) {
 			res.status(404).json({
 				error: e.message,
-				mensaje:
+				message:
 					"Uups! Algo salió mal ... 🔴 ==> No se pudo eliminar la tarea ❌",
 				ok: false,
 			});
 			return;
 		}
-	}
-	
+	},
 };

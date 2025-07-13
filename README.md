@@ -7,21 +7,21 @@
 Ejecutar backEnd:
  cd backEnd
  npm install --> Para instalar dependencias
+ cp .env.example .env --> Renombra el .env.example en .env para poder correr el proyecto
  npm run app --> Ejecutar la API del BackEnd. Se redirige a la ruta api/tasks para mostrar las tareas que existen.
- cp backEnd/.env.example backEnd/.env --> Renombra el .env.example en .env para poder correr el proyecto
+
 
 Ejecutar FrontEnd:
- cd backEnd
+ cd frontEnd
  npm install --> Para instalar depedenciar
- npm run app --> Ejecutar el FrontEnd
- cp frontEnd/.env.example frontEnd/.env --> Renombra el .env.example en .env para poder correr el proyecto
+ cp .env.example .env --> Renombra el .env.example en .env para poder correr el proyecto
+ npm run dev --> Ejecutar el FrontEnd
+ 
 
 
 
 EXTRA:
 
-Aclaración:
-Realizo la persistencia en un archivo .json como bonus en vez de en un array temporal. La ventaja por la cual decidí implementar el .JSON como extra es que al ejecutar la API, podré ver su contenido gracias al .JSON.
 
 🛠 Herramientas usadas:
 - ESLint (configuración recomendada, como indica el enunciado)
