@@ -125,7 +125,7 @@ Nos redirige al componente TaskForm.jsx pero con los datos de la tarea a actuali
 ## 🔧 En caso de no correr en la la maquina virtual de GitHub, Clonar el proyecto
 
 ```bash
-git clone https://github.com/tuusuario/ForIT-TaskList.git
+git clone https://github.com/MatiasValansi/ForIT-TaskList.git
 cd ForIT-TaskList
 ```
 
