@@ -71,14 +71,14 @@ export const TaskList = () => {
               <td> 
                                                   
                   <Link
-                    to={`/editTask/${task.id}`}
+                    to={`/api/editTask/${task.id}`}
                     className="btn btn-sm btn-outline-light me-2"
                   >
                     ✍🏻 Editar
                   </Link>
                   
                   <Link
-                    to={`/tasks/${task.id}`}
+                    to={`/api/tasks/${task.id}`}
                     className="btn btn-sm btn-outline-info me-2"
                   >
                     🔍 Ver
@@ -151,7 +151,7 @@ export const TaskList = () => {
           </button>
         </div>
 
-        <Link to="/newTask" className="btn btn-primary fw-bold">
+        <Link to="/api/newTask" className="btn btn-primary fw-bold">
           ➕ Añadir Tarea
         </Link>
       </div>

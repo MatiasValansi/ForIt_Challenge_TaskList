@@ -71,7 +71,7 @@ const TaskForm = () => {
                   
       if (res.ok) {
         alert(id ? "Tarea actualizada " : "Tarea creada ");
-        navigate('/tasks');
+        navigate('/api/tasks');
       } else {
         alert(data.mensaje || "Error en la operación");
       }
@@ -147,7 +147,7 @@ const TaskForm = () => {
 
         {/* Botones */}
         <div className="d-flex justify-content-between mt-4">
-          <Link to="/tasks" className="btn btn-outline-light">
+          <Link to="/api/tasks" className="btn btn-outline-light">
             ← Volver al menú
           </Link>
           <button type="submit" className="btn btn-primary fw-bold">

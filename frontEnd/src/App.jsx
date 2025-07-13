@@ -13,11 +13,11 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/tasks" replace />} /> 
-        <Route path="/tasks" element={<TaskList />} />
-        <Route path="/newTask" element={<TaskForm />} />
-        <Route path="/editTask/:id" element={<TaskForm />} />
-        <Route path="/tasks/:id" element={<TaskItem />} />
+        <Route path="/" element={<Navigate to="/api/tasks" replace />} /> 
+        <Route path="/api/tasks" element={<TaskList />} />
+        <Route path="/api/newTask" element={<TaskForm />} />
+        <Route path="/api/editTask/:id" element={<TaskForm />} />
+        <Route path="/api/tasks/:id" element={<TaskItem />} />
       </Routes>
       <Footer/>
     </BrowserRouter>  

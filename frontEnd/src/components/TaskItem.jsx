@@ -105,14 +105,14 @@ const TaskItem = () => {
         </div>
 
         <button
-          onClick={() => navigate("/tasks")}
+          onClick={() => navigate("/api/tasks")}
           className="btn btn-outline-light"
         >
           ← Volver al Menú
         </button>
 
         <Link
-          to={`/editTask/${task.id}`}
+          to={`/api/editTask/${task.id}`}
           className="btn btn-sm btn-outline-light me-2"
         >
           ✍🏻 Editar
